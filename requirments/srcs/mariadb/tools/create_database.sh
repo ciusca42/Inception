@@ -2,10 +2,10 @@
 
 service mysql start
 
-echo "CREATE USER IF NOT EXIXTS '$db_user'@'%' IDENTIFIED BY '$db_pwd';" > db.sql
-echo "CREATE DATABASE $db_name;" >> db.sql
-echo "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'%';"
+echo "CREATE USER IF NOT EXIXTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PWD';" > mydb.sql
+echo "CREATE DATABASE $DB_NAME;" >> mydb.sql
+echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" >> mydb.sql
 
-mysql < db.sql
+mysql < mydb.sql
 
 mysqld

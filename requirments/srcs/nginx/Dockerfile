@@ -17,6 +17,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-out /etc/nginx/tls/self_signed.crt \
 	-subj /C=US/ST=Denial/L=Springfield/O=Dis/CN=localhost
 
+EXPOSE 443
+
 CMD [ "nginx", "-g", "daemon off;" ]
 
 
