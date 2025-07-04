@@ -1,0 +1,65 @@
+version: '3.3'
+
+volumes:
+  wordpress:
+    name: wordpress-volume
+    driver: local
+    driver_opts:
+      device: /home/ciusca/data/wordpress-data
+      o: bind
+      type: none
+  mariadb:
+    name: mariadb-volume
+    driver: local
+    driver_opts:
+      device: /home/ciusca/data/mariadb-data
+      o: bind
+      type: none
+
+networks:
+  inception:
+    name: inception-net
+
+services:
+
+  nginx:
+    container_name: nginx
+    build: ./requirments/nginx
+    image: nginx-image
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception  # ✅ FIXED TYPO (was 'incpetion-net')
+    env_file:
+      - .env
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirments/wordpress
+    image: wordpress-image
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirments/mariadb
+    image: mariadb-image
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
