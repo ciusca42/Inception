@@ -45,5 +45,10 @@ stop :
 start : 
 	@docker-compose -f ./srcs/docker-compose.yml start
 
+rm:
+	@docker rmi wordpress-image
+	@docker rmi mariadb-image
+	@docker rmi nginx-image
+
 status : 
 	@docker ps

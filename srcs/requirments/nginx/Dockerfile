@@ -4,7 +4,7 @@ RUN apt-get update -y && apt-get upgrade -y
 
 RUN apt install nginx -y openssl -y
 
-ENV domain_name="ciuschi.it"
+# ENV domain_name="ciuschi.it"
 
 RUN rm -r /etc/nginx/sites-available/
 
