@@ -4,11 +4,14 @@ RUN apt-get update -y && apt-get upgrade -y
 
 RUN apt install nginx -y openssl -y
 
+RUN apt-get install curl -y
 # ENV domain_name="ciuschi.it"
 
-RUN rm -r /etc/nginx/sites-available/
+RUN rm -rf /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
 
-COPY tools/default /etc/nginx/sites-available/
+COPY ./tools/default /etc/nginx/sites-available/
+
+RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 RUN mkdir /etc/nginx/tls
 

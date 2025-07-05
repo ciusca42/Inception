@@ -8,10 +8,10 @@ RUN apt install curl -y  php-mysql -y
 
 COPY tools/configure_script.sh /
 
-RUN chmod +x ./configure_script.sh
+RUN chmod +x /configure_script.sh
 
 COPY tools/wp-config.php /
 
-CMD [ "./configure_script.sh" ]
+CMD [ "/configure_script.sh" ]
 
 
