@@ -22,10 +22,10 @@ print_info "Installed mysql";
 
 print_info "MariaDB started"
 
-mariadb -u root -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
-mariadb -u root -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PWD';"
-mariadb -u root -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';"
-mariadb -u root -e "FLUSH PRIVILEGES;"
+mariadb -u root -p"$DB_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+mariadb -u root -p"$DB_ROOT_PASSWORD" -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PWD';"
+mariadb -u root -p"$DB_ROOT_PASSWORD" -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';"
+mariadb -u root -p"$DB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
 
 print_info "SHUtting down";
 mysqladmin -u root -p"$DB_ROOT_PASSWORD" shutdown

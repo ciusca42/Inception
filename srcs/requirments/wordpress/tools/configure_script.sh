@@ -5,8 +5,8 @@ print_info() {
 }
 
 # creating the dirs that will be used after by nginx and wordpress
-mkdir /var/www/
-mkdir /var/www/html
+mkdir -p /var/www/
+mkdir -p /var/www/html
 
 cd /var/www/html
 

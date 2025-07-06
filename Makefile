@@ -53,5 +53,7 @@ rm:
 logs:
 	@docker compose -f srcs/docker-compose.yml logs
 
+re: down rm
+
 status : 
 	@docker ps
