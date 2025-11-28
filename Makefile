@@ -34,14 +34,14 @@
 all : up
 
 up : 
+	mkdir -p /home/ciusca/data/wordpress-data
+	mkdir -p /home/ciusca/data/mariadb-data
 	@docker compose -f srcs/docker-compose.yml up --build -d
 
 up-build :
 	@docker-compose -f ./srcs/docker-compose.yml up --build -d
 
 build:
-# 	mkdir -p /home/ciusca/data/mysql
-# 	mkdir -p /home/ciusca/data/wordpress
 	@docker-compose  -f ./srcs/docker-compose.yml up --build -d
 
 down : 
