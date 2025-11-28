@@ -2,9 +2,8 @@ FROM debian:bullseye
 
 RUN apt-get update -y && apt-get upgrade -y
 
-RUN apt install php-fpm -y
-
-RUN apt install curl -y  php-mysql -y
+# install php-fpm, curl, mysql php bindings and netcat for healthcheck
+RUN apt-get install -y php-fpm curl php-mysql netcat
 
 COPY tools/configure_script.sh /
 

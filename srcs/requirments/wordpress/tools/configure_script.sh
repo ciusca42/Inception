@@ -44,6 +44,21 @@ print_info "Creating new dir run/php...";
 
 mkdir -p /run/php
 
+# Ensure PHP-FPM workers receive container environment variables so getenv() works for web requests
+# Do not clear environment and expose DB env vars to php-fpm workers
+if ! grep -q "clear_env = no" /etc/php/7.4/fpm/pool.d/www.conf 2>/dev/null; then
+    echo "clear_env = no" >> /etc/php/7.4/fpm/pool.d/www.conf
+fi
+
+cat >> /etc/php/7.4/fpm/pool.d/www.conf <<EOF
+env[DB_NAME] = ${DB_NAME}
+env[DB_USER] = ${DB_USER}
+env[DB_PWD] = ${DB_PWD}
+env[DB_HOST] = ${DB_HOST}
+env[WP_HOME] = ${DOMAIN_NAME}
+env[WP_SITEURL] = ${DOMAIN_NAME}
+EOF
+
 # wp redis enable --allow-root
 
 print_info "Try to run...";

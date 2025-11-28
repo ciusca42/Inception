@@ -34,7 +34,15 @@
 all : up
 
 up : 
-	@docker-compose -f ./srcs/docker-compose.yml up -d
+	@docker compose -f srcs/docker-compose.yml up --build -d
+
+up-build :
+	@docker-compose -f ./srcs/docker-compose.yml up --build -d
+
+build:
+# 	mkdir -p /home/ciusca/data/mysql
+# 	mkdir -p /home/ciusca/data/wordpress
+	@docker-compose  -f ./srcs/docker-compose.yml up --build -d
 
 down : 
 	@docker-compose -f ./srcs/docker-compose.yml down
@@ -53,7 +61,7 @@ rm:
 logs:
 	@docker compose -f srcs/docker-compose.yml logs
 
-re: down rm
+re: down build up
 
 status : 
 	@docker ps

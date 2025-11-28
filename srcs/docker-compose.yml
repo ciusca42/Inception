@@ -16,12 +16,16 @@ volumes:
 
 networks:
   inception-net:
-    name: inception-bridge
+    name: inception-net
     driver: bridge
 
 services:
 
   nginx:
+    depends_on:
+      wordpress:
+        condition: service_started
+
     container_name: nginx
     build: ./requirments/nginx
     image: nginx-image
