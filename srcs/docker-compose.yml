@@ -40,12 +40,6 @@ services:
     restart: always
 
   wordpress:
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    
     container_name: wordpress
     build: ./requirments/wordpress
     image: wordpress-image
